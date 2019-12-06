@@ -1,0 +1,36 @@
+/*
+ * Copyright (c) 2019 by Delphix. All rights reserved.
+ */
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName='SftpCopyDeadlock'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    implementation "commons-logging:commons-logging:1.2"
+    implementation "org.apache.commons:commons-vfs2:2.4.1"
+    implementation "com.jcraft:jsch:0.1.55"
+}
+
+task srcZip(type: Zip) {
+    classifier = 'src'
+    from projectDir
+    include 'src/**/*'
+    include 'gradle/**/*'
+    include 'build.gradle'
+    include 'settings.gradle'
+    include 'gradlew'
+    include 'gradlew.bat'
+    include 'README.md'
+    doLast {
+        println "Path to zip: $archivePath.path"
+    }
+}
